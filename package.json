@@ -1,0 +1,26 @@
+{
+  "name": "nodetest",
+  "version": "1.0.0",
+  "description": "测试node",
+  "main": "hello.js",
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yinxuejing123/nodeTest.git"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "xuejingyin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yinxuejing123/nodeTest/issues"
+  },
+  "homepage": "https://github.com/yinxuejing123/nodeTest#readme"
+}
