@@ -160,28 +160,130 @@ var event = require('events');
 // console.log('测试结果')
 
 //解决文件覆盖问题
-var data = '';
-var data2 = '走过的路都有你的气息 ';
-//1.读取流
-//创建可读流
-var readStream = fs.createReadStream("input.txt");
-//设置utf-8编码
-readStream.setEncoding('UTF8');
-//处理流事件
-readStream.on('data', chunk => data += chunk);
-readStream.on('end', () => writeS(data));
-readStream.on("error", err => console.log(err.strck));
-console.log("程序1执行完毕");
-//2.写入流
-//创建可写流
-var writeS = dataS =>{
-    var writeStream = fs.createWriteStream("output.txt");
-    //使用utf-8写入流
-    writeStream.write(data2+dataS, "UTF8");
-    //标记文件末尾
-    writeStream.end();
-    //处理事件流
-    writeStream.on("finish", () => console.log("写入完成"));
-    writeStream.on("error", err => console.log(err.stack));
-    console.log("程序2执行完毕");
+// var data = '';
+// var data2 = '走过的路都有你的气息 ';
+// //1.读取流
+// //创建可读流
+// var readStream = fs.createReadStream("input.txt");
+// //设置utf-8编码
+// readStream.setEncoding('UTF8');
+// //处理流事件
+// readStream.on('data', chunk => data += chunk);
+// readStream.on('end', () => writeS(data));
+// readStream.on("error", err => console.log(err.strck));
+// console.log("程序1执行完毕");
+// //2.写入流
+// //创建可写流
+// var writeS = dataS =>{
+//     var writeStream = fs.createWriteStream("output.txt");
+//     //使用utf-8写入流
+//     writeStream.write(data2+dataS, "UTF8");
+//     //标记文件末尾
+//     writeStream.end();
+//     //处理事件流
+//     writeStream.on("finish", () => console.log("写入完成"));
+//     writeStream.on("error", err => console.log(err.stack));
+//     console.log("程序2执行完毕");
+// }
+
+//全局变量
+// console.log(__filename);// /xuejing/Node Trip/main.js
+// console.log(__dirname);// /xuejing/Node Trip
+// 定时器和延时器
+//延时器
+// function testSet(){
+//     var i=0;
+//     i=i+1;
+//     console.log(i)
+// }
+// var out = setTimeout(testSet,1000);//一秒后打印1
+//
+// clearTimeout(out);//不打印直接清除延时器
+//定时器
+// var i=0;
+// function testInterval(){
+//     i=i+5;
+//     console.log(i)
+// }
+// var interval = setInterval(testInterval,1000);//每隔一秒打印加五后的值
+//
+// clearInterval(interval);//不打印直接清除定时器
+
+//node的常用工具之util
+//util.inherits
+// var util = require('util');
+// function Base(){
+//     this.name = 'base';
+//     this.base = 2018;
+//     this.sayHello = function (){
+//         console.log("Hello "+ this.name)
+//     }
+// }
+// Base.prototype.showName = function(){
+//     console.log('here is name ' + this.name);
+// }
+//
+// function Sub(){
+//     this.name = 'sub';
+//     console.log(this.name)
+// }
+// util.inherits(Sub,Base);//Sub继承自Base，顺序为Sub，Base。并且继承的函数只能继承Base函数的原型定义的函数，构造函数内部的函数将不被继承。
+// var objBase = new Base();
+// objBase.showName();
+// objBase.sayHello();
+// console.log(objBase);
+// // here is name base
+// // Hello base
+// // Base { name: 'base', base: 2018, sayHello: [Function] }
+// var objSub = new Sub();
+// objSub.showName();
+// // objSub.sayHello();
+// console.log(objSub);
+// // sub
+// // here is name sub
+// // Sub { name: 'sub' }
+
+//util.inspect  util.inspect(object,[showHidden],[depth],[colors])
+//showHidden 是一个可选参数，如果值为 true，将会输出更多隐藏信息,depth 表示最大递归的层数,如果color 值为 true，输出格式将会以ANSI 颜色编码，通常用于在终端显示更漂亮 的效果.
+var util = require("util");
+function Person(){
+    this.name = "xuejingyin";
+    this.toString = function(){
+        return this.name
+    }
 }
+var obj = new Person();
+console.log(util.inspect(obj,true,2,false));
+// Person {
+//     name: 'xuejingyin',
+//         toString:
+//     { [Function]
+//         [length]: 0,
+//         [name]: '',
+//         [arguments]: null,
+//         [caller]: null,
+//         [prototype]: { [constructor]: [Circular] } } }
+console.log(util.inspect(obj,false,2,false));
+//Person { name: 'xuejingyin', toString: [Function] }
+
+//util.isArray(object)
+util.isArray([])
+// true
+util.isArray(new Array)
+// true
+
+//util.isRegExp(object)
+util.isRegExp(/some regexp/)
+// true
+util.isRegExp(new RegExp('another regexp'))
+// true
+
+// util.isDate(object)
+util.isDate(new Date())
+// true
+
+//util.isError(object)
+util.isError(new Error())
+// true
+util.isError(new TypeError())
+// true
